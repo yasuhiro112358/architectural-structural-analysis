@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  php-frontend:
+    build: ./php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./php/src:/var/www/html
+    depends_on:
+      - flask-api
+
+  flask-api:
+    build: ./flask
+    ports:
+      # Macでは5000が使用中のため
+      - "5001:5000"

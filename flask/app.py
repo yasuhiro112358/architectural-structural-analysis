@@ -36,7 +36,9 @@ def calculate():
 if __name__ == '__main__':
     # Macではport=5000をAirPlay Receiverが使用している
     # app.run(debug=True, host='0.0.0.0', port=5000)
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    # app.run(debug=True, host='0.0.0.0', port=5001)
+    # Dockerでportを5001:5000にマッピングしたため設定を5000に戻す
+    app.run(debug=True, host='0.0.0.0', port=5000)
     # debug=True: デバッグ情報の提供
     # host='0.0.0.0': すべてのネットワークインターフェースでアプリケーションを利用可能にし、外部からのアクセスを許可
     # port=5000: アプリケーションがリッスンするポート番号

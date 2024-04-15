@@ -21,7 +21,9 @@ $options = array(
 $context  = stream_context_create($options);
 // APIにHTTPリクエストを送信（第１引数はAPIのURL）
 // $result = file_get_contents("http://localhost:5000/calculate", false, $context);
-$result = file_get_contents("http://localhost:5001/calculate", false, $context);
+// $result = file_get_contents("http://localhost:5001/calculate", false, $context);
+// Docker内のflask-apiをホストとする
+$result = file_get_contents("http://flask-api:5000/calculate", false, $context);
 if ($result === FALSE) {
     /* Handle error */
     echo "<h2>Error</h2>";
