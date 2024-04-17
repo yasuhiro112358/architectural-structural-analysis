@@ -2,6 +2,7 @@
 # python3 app.py
 # 
 
+import os # Herokuの環境変数を読み込むため
 # FlaskフレームワークからFlaskクラス、requestオブジェクト、jsonify関数をインポート
 from flask import Flask, request, jsonify 
 # CORS（Cross-Origin Resource Sharing）
@@ -39,11 +40,11 @@ if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=5001)
     
     # Dockerでportを5001:5000にマッピングしたため設定を5000に戻す
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # app.run(debug=True, host='0.0.0.0', port=5000)
     # debug=True: デバッグ情報の提供
     # host='0.0.0.0': すべてのネットワークインターフェースでアプリケーションを利用可能にし、外部からのアクセスを許可
     # port=5000: アプリケーションがリッスンするポート番号
 
-    # Herokuでおそらく必要な修正（ポートをHerokuの設定に合わせる）
-    # port = int(os.environ.get('PORT', 5000))  # デフォルトでは5000ポートを使用
-    # app.run(host='0.0.0.0', port=port)  # 環境変数からportを取得（リスペクト）する必要がある
+    # Herokuで必要な設定（ポートをHerokuの設定に合わせる）
+    port = int(os.environ.get('PORT', 5000))  # 環境変数からポート番号を取得、設定されていなければ5000をデフォルト値とする
+    app.run(host='0.0.0.0', port=port)

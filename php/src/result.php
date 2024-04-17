@@ -31,4 +31,5 @@ if ($result === FALSE) {
 
 // Output
 echo "<h1>Result</h1>";
-echo "<p>Bending Stress: " . json_decode($result, true)['bending_stress'] . " Pa</p>";
+// echo "<p>Bending Stress: " . json_decode($result, true)['bending_stress'] . " Pa</p>";
+echo "<p>Bending Stress: " . number_format(round(json_decode($result, true)['bending_stress'], 3), 3, '.', ',') . " Pa</p>";

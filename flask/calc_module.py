@@ -5,6 +5,7 @@ def calculate_structure(udl, length, section_modulus):
 
     bending_moment = udl * length**2 / 8
     bending_stress = bending_moment / section_modulus
+    # bending_stress = round(bending_stress, 3)
 
     return bending_stress
 
