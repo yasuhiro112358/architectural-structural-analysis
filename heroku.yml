@@ -1,0 +1,17 @@
+build:
+  docker:
+    web: php/Dockerfile
+    api: flask/Dockerfile
+
+release:
+  image:
+    web: php
+    api: flask
+
+run:
+  web:
+    ports:
+      - "8080:80"
+  api:
+    ports:
+      - "5001:5000"

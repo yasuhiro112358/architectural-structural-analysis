@@ -1,16 +1,34 @@
 version: '3.8'
 services:
   php-frontend:
-    build: ./php
+    build: 
+      context: ./php
+      dockerfile: Dockerfile
+      # amd64用にイメージをビルド
+      # build:直下に記述する
+      # version: '3.8'ではplatform:は非対応
+      # platform: linux/amd64
+      # args:
+      #   # amd64用にイメージをビルド
+      #   # build:直下に記述する
+      #   BUILDPLATFORM: linux/amd64
     ports:
       - "8080:80"
-    volumes:
-      - ./php/src:/var/www/html
+    # volumes:
+    #   - ./php/src:/var/www/html
     depends_on:
       - flask-api
 
   flask-api:
-    build: ./flask
+    build: 
+      context: ./flask
+      dockerfile: Dockerfile
+      # version: '3.8'ではplatform:は非対応
+      # platform: linux/amd64
+      # args:
+      #   # amd64用にイメージをビルド
+      #   # build:直下に記述する
+      #   BUILDPLATFORM: linux/amd64
     ports:
       # Macでは5000が使用中のため
       - "5001:5000"
