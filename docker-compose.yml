@@ -13,7 +13,9 @@ services:
       #   # build:直下に記述する
       #   BUILDPLATFORM: linux/amd64
     ports:
+      # ローカル開発環境用の設定
       - "8080:80"
+      # - "8080:443"
     # volumes:
     #   - ./php/src:/var/www/html
     depends_on:
@@ -30,5 +32,6 @@ services:
       #   # build:直下に記述する
       #   BUILDPLATFORM: linux/amd64
     ports:
+      # ローカル開発環境用の設定
       # Macでは5000が使用中のため
       - "5001:5000"

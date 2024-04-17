@@ -1,1 +1,2 @@
-# HEROKUで実行するコマンド
+web: php-frontend
+api: flask-api
