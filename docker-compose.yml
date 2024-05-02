@@ -1,9 +1,10 @@
 version: '3.8'
 services:
-  php-frontend:
+  # php-frontend:
+  web:
     build: 
-      context: ./php
-      dockerfile: Dockerfile
+      context: ./architectual-structural-analysis
+      dockerfile: Dockerfile.web
       # amd64用にイメージをビルド
       # build:直下に記述する
       # version: '3.8'ではplatform:は非対応
@@ -19,12 +20,14 @@ services:
     # volumes:
     #   - ./php/src:/var/www/html
     depends_on:
-      - flask-api
+      # - flask-api
+      - flask
 
-  flask-api:
+  # flask-api:
+  flask:
     build: 
       context: ./flask
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.web
       # version: '3.8'ではplatform:は非対応
       # platform: linux/amd64
       # args:
