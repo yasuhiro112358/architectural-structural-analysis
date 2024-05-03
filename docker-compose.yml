@@ -2,7 +2,7 @@ version: '3.8'
 services:
   php-frontend:
     build:
-      context: ./architectual-structural-analysis-frontend/
+      context: ./architectural-structural-analysis-frontend/
       dockerfile: Dockerfile.web
     ports:
       - "8080:80"
@@ -12,7 +12,7 @@ services:
 
   flask-api:
     build:
-      context: ./architectual-structural-analysis-api/
+      context: ./architectural-structural-analysis-api/
       dockerfile: Dockerfile.web
     ports:
       - "5001:5000"
