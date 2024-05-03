@@ -1,40 +1,20 @@
 version: '3.8'
 services:
-  # php-frontend:
-  web:
-    build: 
-      context: ./architectual-structural-analysis
+  php-frontend:
+    build:
+      context: ./architectual-structural-analysis-frontend/
       dockerfile: Dockerfile.web
-      # amd64用にイメージをビルド
-      # build:直下に記述する
-      # version: '3.8'ではplatform:は非対応
-      # platform: linux/amd64
-      # args:
-      #   # amd64用にイメージをビルド
-      #   # build:直下に記述する
-      #   BUILDPLATFORM: linux/amd64
     ports:
-      # ローカル開発環境用の設定
       - "8080:80"
-      # - "8080:443"
-    # volumes:
-    #   - ./php/src:/var/www/html
+      # for local env
     depends_on:
-      # - flask-api
-      - flask
+      - flask-api
 
-  # flask-api:
-  flask:
-    build: 
-      context: ./flask
+  flask-api:
+    build:
+      context: ./architectual-structural-analysis-api/
       dockerfile: Dockerfile.web
-      # version: '3.8'ではplatform:は非対応
-      # platform: linux/amd64
-      # args:
-      #   # amd64用にイメージをビルド
-      #   # build:直下に記述する
-      #   BUILDPLATFORM: linux/amd64
     ports:
-      # ローカル開発環境用の設定
-      # Macでは5000が使用中のため
       - "5001:5000"
+      # for local env
+      # 5000 is used in Mac

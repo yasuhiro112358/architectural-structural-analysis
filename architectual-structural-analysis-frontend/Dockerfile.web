@@ -1,0 +1,6 @@
+# FROM php:7.4-apache
+FROM --platform=linux/amd64 php:7.4-apache
+# Heroku needs AMD64 version
+
+# Copy all PHP files
+COPY ./ /var/www/html/

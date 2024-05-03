@@ -31,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $result = file_get_contents("http://flask-api:5000/calculate", false, $context);
 
     // 開発環境
-    // $result = file_get_contents("http://flask:5000/calculate", false, $context);
+    $file = file_get_contents("http://flask-api:5000/calculate", false, $context);
 
     // 実装環境
-    $file = file_get_contents("https://pure-journey-37437-b4f9140270ec.herokuapp.com/calculate", false, $context);
+    // $file = file_get_contents("https://pure-journey-37437-b4f9140270ec.herokuapp.com/calculate", false, $context);
 
     if ($file === false) {
         /* Handle error */
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Output
 $page_title = "Architectural Structural Analysis";
 
-include "./_parts/_header.php";
+include "./includes/header.php";
 ?>
 
 <div class="container mt-5">
@@ -57,7 +57,7 @@ include "./_parts/_header.php";
 
     <div class="row justify-content-center mb-3">
         <div class="col-md-8">
-            <img src="./img/beam.png" class="img-fluid w-100 p-3" alt="">
+            <img src="./assets/images/beam.png" class="img-fluid w-100 p-3" alt="">
         </div>
     </div>
 
@@ -95,5 +95,5 @@ include "./_parts/_header.php";
 </div>
 
 <?php
-include "./_parts/_footer.php";
+include "./includes/footer.php";
 ?>
