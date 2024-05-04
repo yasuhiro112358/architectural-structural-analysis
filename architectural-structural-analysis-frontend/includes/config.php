@@ -8,4 +8,4 @@ define("API_URL", "http://flask-api:5000");
 
 
 // Functions
-require_once "./src/functions.php";
+require_once(__DIR__ . "/../src/functions.php");
