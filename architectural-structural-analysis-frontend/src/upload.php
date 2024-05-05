@@ -23,7 +23,12 @@ if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file'
     // 保存したファイルを元にAPIへの送信データを作成
     $file = new CURLFile($target_file, $_FILES['file']['type'], $_FILES['file']['name']);
     $data = array("file" => $file);
-    curl_setopt($curl, CURLOPT_URL, API_URL . "/upload");
+
+    // for test
+    // curl_setopt($curl, CURLOPT_URL, API_URL . "/upload");
+    // for 気象庁's data
+    curl_setopt($curl, CURLOPT_URL, API_URL . "/seismic-wave");
+
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -44,6 +49,7 @@ if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file'
 
     // レスポンスがCSVであるかをチェック
     if (strpos($header, 'Content-Type: text/csv') !== false) {
+    // if (strpos($header, 'Content-Type: text/csv') !== false or strpos($header, 'Content-Type: text/html') !== false) {
         // APIからのレスポンスをCSVファイルとして保存
         $output_file_path = $target_dir . 'output.csv';
         file_put_contents($output_file_path, $body);
@@ -52,6 +58,7 @@ if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file'
         header("location: ../seismic-wave.php");
         exit;
     } else {
-        echo "Failed to retrieve a valid CSV file. Here's the response header: " . nl2br(htmlspecialchars($header));
+        echo "Failed to retrieve a valid CSV file.<br>Here's the response header: " . nl2br(htmlspecialchars($header) . "<br>");
+        exit;
     }    
 }

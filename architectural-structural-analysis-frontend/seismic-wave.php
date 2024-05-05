@@ -26,10 +26,38 @@ include "./includes/header.php";
 
 
                 <div class="mb-3">
-                    <h2>History of Seismic Acceleration</h2>
-                    <canvas id="myChart">
-                        Canvas not supported...
-                    </canvas>
+                    <h2 class="text-center mb-3">
+                        History of Seismic Acceleration
+                    </h2>
+
+                    <div class="mb-3">
+                        <canvas id="ns-acc-chart">
+                            Canvas not supported...
+                        </canvas>
+                        <p class="text-center">
+                            Fig.1 NS-direction
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <canvas id="ew-acc-chart">
+                            Canvas not supported...
+                        </canvas>
+                        <p class="text-center">
+                            Fig.2 EW-direction
+                        </p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <canvas id="ud-acc-chart">
+                            Canvas not supported...
+                        </canvas>
+                        <p class="text-center">
+                            Fig.3 UD-direction
+                        </p>
+                    </div>
+
+                    
                 </div>
 
 

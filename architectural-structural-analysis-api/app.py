@@ -40,6 +40,7 @@ def calculate():
     # 計算結果をJSON形式でクライアントに返す
     return jsonify({"bending_stress": result})
 
+# for a simple csv
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # ファイルを受け取る
@@ -66,6 +67,54 @@ def upload_file():
         download_name='processed.csv' # Flask 2.0以降 
     )
 
+
+# for 気象庁's csv
+@app.route('/seismic-wave', methods=['POST'])
+def upload_file2():
+    # ファイルを受け取る
+    file = request.files['file']
+    if not file:
+        return "Error: No file"
+
+    # CSVを読み込む
+    # df = pd.read_csv(file) # df: Data Frame; pandasの機能 
+    # df = pd.read_csv(file, header=6, skipinitialspace=True, dtype={'NS': float, 'EW': float, 'UD': float}) # skip 6 rows 
+    df = pd.read_csv(file, header=6, skipinitialspace=True, encoding='shift_jis', dtype={'NS': float, 'EW': float, 'UD': float}) # skip 6 rows 
+    
+    sampling_rate = 100 # サンプリング周波数。外部から受け取るように変更
+    sampling_interval = round(1 / sampling_rate, 3)
+
+    time_data = []  # 空のリストを初期化
+    for i in range(len(df)):
+        time = round((i + 1) * sampling_interval, 3)
+        time_data.append(time)
+
+    df['time'] = time_data 
+
+    # df['processed_acceleration'] = df['NS'] * 2  # 仮の処理
+    # df['processed_acceleration'] = df['EW'] * 2  # 仮の処理
+    # df['processed_acceleration'] = df['UD'] * 2  # 仮の処理
+    # max_value = df['column_name'].max()
+    # min_value = df['column_name'].min()
+    # absolute_column_values = df['column_name'].abs()
+
+    # order rows
+    # df = df[['time'] + [col for col in df.columns if col != 'time']]
+    df = df[['time', 'NS', 'EW', 'UD']]
+
+
+    # 結果をCSVとして送る
+    # output = io.StringIO()
+    output = io.BytesIO()
+    df.to_csv(output, index=False, encoding='utf-8')
+    output.seek(0) # 操作中の行を先頭行に移動
+
+    return send_file(
+        output, 
+        mimetype='text/csv', 
+        as_attachment=True,
+        download_name='processed.csv' # Flask 2.0以降 
+    )
 
 
 # ==== appの実行 ====
