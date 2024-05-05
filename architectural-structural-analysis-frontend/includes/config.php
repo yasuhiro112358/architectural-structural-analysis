@@ -1,7 +1,7 @@
 <?php
 // API_URL
-define("API_URL", "http://flask-api:5000");
-// define("API_URL", "https://pure-journey-37437-b4f9140270ec.herokuapp.com");
+// define("API_URL", "http://flask-api:5000");
+define("API_URL", "https://pure-journey-37437-b4f9140270ec.herokuapp.com");
 
 
 // API_KEY
