@@ -4,3 +4,8 @@ FROM --platform=linux/amd64 php:7.4-apache
 
 # Copy all PHP files
 COPY ./ /var/www/html/
+
+# Change permission for uploads dir
+RUN mkdir -p /var/www/html/uploads && \
+    chown -R www-data:www-data /var/www/html/uploads && \
+    chmod -R 755 /var/www/html/uploads
