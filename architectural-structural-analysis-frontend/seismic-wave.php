@@ -16,7 +16,7 @@ include "./includes/header.php";
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="mb-3">
-                    <label for="file" class="form-label">Upload a CSV file:</label>
+                    <label for="file" class="form-label">Upload a CSV file downloaded from <a href="https://www.data.jma.go.jp/eqev/data/kyoshin/jishin/index.html">Japan Meteorological Agency</a> to see its wave:</label>
                     <input type="file" class="form-control" name="file" value="" id="file" placeholder="" required>
                 </div>
 
@@ -47,7 +47,7 @@ include "./includes/header.php";
                             Fig.2 EW-direction
                         </p>
                     </div>
-                    
+
                     <div class="mb-3">
                         <canvas id="ud-acc-chart">
                             Canvas not supported...

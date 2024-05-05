@@ -11,12 +11,12 @@ include "./includes/header.php";
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <a href="simple-support.php" class="btn btn-dark d-block mb-3">
-                Simple Support
-            </a>
-
             <a href="seismic-wave.php" class="btn btn-dark d-block mb-3">
                 Seismic Wave
+            </a>
+            
+            <a href="simple-support.php" class="btn btn-dark d-block mb-3">
+                Simple Support
             </a>
         </div>
     </div>
