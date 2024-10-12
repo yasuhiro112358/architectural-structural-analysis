@@ -1,22 +1,10 @@
-version: '3.8'
 services:
-  php-frontend:
-    build:
-      context: ./architectural-structural-analysis-frontend/
-      dockerfile: Dockerfile.web
+  flask_app:
+    build: .
     ports:
-      - "8080:80"
-      # for local env
-    volumes:
-      - ./architectural-structural-analysis-frontend/uploads/:/var/www/html/uploads/
-    depends_on:
-      - flask-api
-
-  flask-api:
-    build:
-      context: ./architectural-structural-analysis-api/
-      dockerfile: Dockerfile.web
-    ports:
-      - "5001:5000"
-      # for local env
+      - "80:80"
+      # - "5001:5001"
       # 5000 is used in Mac
+    volumes:
+      - ./api:/var/www/my_flask_app/api
+      - ./frontend:/var/www/my_flask_app/frontend
