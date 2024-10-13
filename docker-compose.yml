@@ -3,8 +3,7 @@ services:
     build: .
     ports:
       - "80:80"
-      # - "5001:5001"
-      # 5000 is used in Mac
+      # 5000 is already used in Mac
     volumes:
-      - ./api:/var/www/my_flask_app/api
-      - ./frontend:/var/www/my_flask_app/frontend
+      - ./api:/var/www/html/arch-struct-analysis/api
+      - ./frontend:/var/www/html/arch-struct-analysis/frontend
