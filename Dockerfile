@@ -20,21 +20,21 @@ RUN yum clean all
 RUN pip3 install uwsgi
 
 # アプリケーションのコードをコピー
-COPY ./api /var/www/my_flask_app/api
-COPY ./frontend /var/www/my_flask_app/frontend
+COPY ./api /var/www/html/arch-struct-analysis/api
+COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
 # requirements.txtを使って依存関係をインストール
-RUN pip3 install -r /var/www/my_flask_app/api/requirements.txt
+RUN pip3 install -r /var/www/html/arch-struct-analysis/api/requirements.txt
 
 # Apacheの設定ファイルをコピー
-COPY ./my_flask_app.conf /etc/httpd/conf.d/my_flask_app.conf
+COPY ./arch-struct-analysis.conf /etc/httpd/conf.d/arch-struct-analysis.conf
 
 # uWSGIの設定ファイルをコピー
-COPY ./my_flask_app.ini /var/www/my_flask_app/my_flask_app.ini
+COPY ./arch-struct-analysis.ini /var/www/html/arch-struct-analysis/arch-struct-analysis.ini
 
 # ファイルの所有者を変更
-RUN chown -R apache:apache /var/www/my_flask_app
-RUN chmod -R 755 /var/www/my_flask_app
+RUN chown -R apache:apache /var/www/html/arch-struct-analysis
+RUN chmod -R 755 /var/www/html/arch-struct-analysis
 
 # ログディレクトリの設定
 RUN chown -R root:apache /var/log/httpd
