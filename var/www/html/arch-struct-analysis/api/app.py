@@ -4,6 +4,10 @@ from flask_cors import CORS # CORS（Cross-Origin Resource Sharing）
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/api/home', methods=['GET'])
+def home():
+    return 'This is Web API for calculation of architectural structure.'
+
 @app.route('/api/message', methods=['GET'])
 def get_message():
     return jsonify({'message': 'Hello from Flask API in Docker!'})
