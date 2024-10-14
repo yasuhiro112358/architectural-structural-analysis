@@ -2,8 +2,17 @@ services:
   flask_app:
     build: .
     ports:
-      - "80:80"
+      - "8080:80"
       # 5000 is already used in Mac
     volumes:
-      - ./api:/var/www/html/arch-struct-analysis/api
-      - ./frontend:/var/www/html/arch-struct-analysis/frontend
+      - ./var/www/html/arch-struct-analysis/api:/var/www/html/arch-struct-analysis/api
+      - ./var/www/html/arch-struct-analysis/frontend:/var/www/html/arch-struct-analysis/frontend
+
+      - ./etc/httpd/conf/httpd.conf:/etc/httpd/conf/httpd.conf
+      - ./etc/httpd/conf.d/php.conf:/etc/httpd/conf.d/php.conf
+      - ./etc/httpd/conf.d/arch-struct-analysis.conf:/etc/httpd/conf.d/arch-struct-analysis.conf
+      - ./var/www/html/arch-struct-analysis/arch-struct-analysis.ini:/var/www/html/arch-struct-analysis/arch-struct-analysis.ini
+
+      - ./var/log/httpd:/var/log/httpd
+      - ./var/log/php-fpm:/var/log/php-fpm
+
