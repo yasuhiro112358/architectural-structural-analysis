@@ -3,19 +3,6 @@ require_once "./includes/config.php";
 
 $page_title = "Simple Support";
 
-$udl = "";
-$length = "";
-$section_modulus = "";
-
-// Calculate Bending Stress
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $udl = $_POST['udl'];
-    $length = $_POST['length'];
-    $section_modulus = $_POST['section_modulus'];
-
-    $result = getBendingStress($udl, $length, $section_modulus);
-}
-
 include "./includes/header.php";
 ?>
 
@@ -28,16 +15,16 @@ include "./includes/header.php";
         </div>
     </div>
 
-    <?php if (isset($result)) : ?>
-        <div class="row justify-content-center mb-3">
+    <div id="result-container">
+        <div class="row justify-content-center mb-3" >
             <div class="col-md-6">
-                <div class="border border-2 p-3">
-                    <h2 class="text-center">Result</h2>
-                    <p class="text-center fs-4 m-0"><?= $result ?></p>
+                <div class="border border-2 p-3" style="height: 120px">
+                    <h2 class="fs-3 text-left">Bending Stress:</h2>
+                    <p id="bending-stress" class="text-end fs-4 m-0"></p>
                 </div>
             </div>
         </div>
-    <?php endif; ?>
+    </div>
 
     <form action="" method="post">
         <div class="row justify-content-center mb-3">
@@ -58,7 +45,7 @@ include "./includes/header.php";
                 </div>
 
                 <div class="mb-5">
-                    <button type="submit" class="btn btn-dark w-100">Calculate</button>
+                    <button type="submit" id="calculate-btn" class="btn btn-dark w-100">Calculate</button>
                 </div>
 
                 <div class="mb-5">
@@ -72,3 +59,41 @@ include "./includes/header.php";
 <?php
 include "./includes/footer.php";
 ?>
+
+<script>
+    'use strict';
+    {
+        const calculateBtn = document.getElementById('calculate-btn');
+        calculateBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            calculateBtn.textContent = 'Calculating...';
+
+            fetch('<?= API_URL ?>/api/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        udl: document.getElementById('udl').value,
+                        length: document.getElementById('length').value,
+                        section_modulus: document.getElementById('section_modulus').value,
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('API connection failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('bending-stress').textContent = `${data.bending_stress.toFixed(2)} [Pa]`;
+                    calculateBtn.textContent = 'Calculate';
+                })
+                .catch(error => {
+                    console.error(error);
+                    calculateBtn.textContent = 'Calculate';
+                });
+        });
+    }
+</script>

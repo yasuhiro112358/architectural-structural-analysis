@@ -1,32 +1,45 @@
 <?php
-function getBendingStress($udl, $length, $section_modulus)
-{
-    $data = array(
-        "udl" => $udl,
-        "length" => $length,
-        "section_modulus" => $section_modulus
-    );
+// function getBendingStress($udl, $length, $section_modulus)
+// {
+//     $data = array(
+//         "udl" => $udl,
+//         "length" => $length,
+//         "section_modulus" => $section_modulus
+//     );
 
-    // HTTPリクエストの設定
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json", // 送信するコンテンツがJSON形式であることを明示
-            'method'  => 'POST',
-            'content' => json_encode($data) // JSON形式にエンコードしたデータを指定
-        )
-    );
+//     var_dump($data);
+//     echo "<br>";
 
-    $context  = stream_context_create($options); // コンテキストの作成
+//     // HTTPリクエストの設定
+//     $options = array(
+//         'http' => array(
+//             'header'  => "Content-type: application/json", // 送信するコンテンツがJSON形式であることを明示
+//             'method'  => 'POST',
+//             'content' => json_encode($data) // JSON形式にエンコードしたデータを指定
+//         )
+//     );
 
-    $file = file_get_contents(API_URL . "/calculate", false, $context); // APIにHTTPリクエスト
+//     $context  = stream_context_create($options); // コンテキストの作成
 
-    if ($file === false) { // Handle error
-        $result = "Error";
-    } else {
-        $result = json_decode($file, true)['bending_stress'];
-        $result = number_format(round($result, 3), 1, '.', ',');
-        $result = "Bending Stress: $result [Pa]";
-    }
+//     echo API_URL . "/api/calculate";
+//     echo "<br>";
+    
+//     var_dump($context);
+//     echo "<br>";
 
-    return $result;
-}
+//     // $file = file_get_contents(API_URL . "/calculate", false, $context); // APIにHTTPリクエスト
+//     $file = file_get_contents(API_URL . "/api/calculate", false, $context); // APIにHTTPリクエスト
+
+//     var_dump($file);
+//     echo "<br>";
+
+//     if ($file === false) { // Handle error
+//         $result = "Error: API connection failed";
+//     } else {
+//         $result = json_decode($file, true)['bending_stress'];
+//         $result = number_format(round($result, 3), 1, '.', ',');
+//         $result = "Bending Stress: $result [Pa]";
+//     }
+
+//     return $result;
+// }
