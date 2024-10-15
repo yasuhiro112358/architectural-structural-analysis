@@ -1,9 +1,9 @@
 <?php
 require_once "./includes/config.php";
 
-$page_title = "Index";
+// $page_title = "Index";
 
-include "./includes/header.php";
+// include "./includes/header.php";
 ?>
 
 <div class="container mt-5">
@@ -27,5 +27,5 @@ include "./includes/header.php";
 
 
 <?php
-include "./includes/footer.php";
+// include "./includes/footer.php";
 ?>
