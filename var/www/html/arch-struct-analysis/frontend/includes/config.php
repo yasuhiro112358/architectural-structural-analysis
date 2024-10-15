@@ -12,4 +12,4 @@ define("API_URL", "http://localhost:8080");
 
 
 // Functions
-require_once(__DIR__ . "/../src/functions.php");
+// require_once(__DIR__ . "/../src/functions.php");

@@ -60,3 +60,30 @@ docker pull 767397934648.dkr.ecr.ap-northeast-1.amazonaws.com/arch-struct-analys
 # Run the image
 docker-compose -f docker-compose.prod.yml up -d
 ```
+
+### SPA (Single Page Application)
+.htaccessで全てのリクエストをindex.htmlにリダイレクトする。
+
+```apache
+# /var/www/html/arch-struct-analysis/frontend/.htaccess
+
+# If mod_rewrite is enabled, enable URL rewriting
+<IfModule mod_rewrite.c>
+    # Enable URL rewriting
+    RewriteEngine On 
+
+    # Set the base URL for the URL rewriting
+    RewriteBase / 
+
+    # Do not rewrite index.html
+    RewriteRule ^index\.html$ - [L]
+
+    # Rewrite everything else to index.html
+    # Request filename is not file
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Request filename is not directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Rewrite to index.html
+    RewriteRule . /index.html [L]
+</IfModule>
+```
