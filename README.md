@@ -87,3 +87,25 @@ docker-compose -f docker-compose.prod.yml up -d
     RewriteRule . /index.html [L]
 </IfModule>
 ```
+
+### SPA (Single Page Application)
+https://chatgpt.com/share/670f7336-1bbc-800f-b1c2-d70b52ac4aca
+
+```
+# フォルダ構成
+ 
+/spa-project
+  /src
+    /components
+      Header.js
+      Home.js
+      About.js
+    /services
+      router.js
+    /styles
+      style.css
+    App.js
+    index.js
+  /public
+    index.html
+```
