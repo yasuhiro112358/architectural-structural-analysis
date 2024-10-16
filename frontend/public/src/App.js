@@ -8,12 +8,14 @@ export const App = () => {
   const currentRoute = router.getCurrentRoute();
 
   // Render the header
-  appElement.innerHTML = Header();
+  // appElement.innerHTML = Header();
 
   // Render page based on route
   if (currentRoute === '/') {
-    appElement.innerHTML += Home();
+    // appElement.innerHTML += Home();
+    appElement.innerHTML = Home();
   } else if (currentRoute === '/about') {
-    appElement.innerHTML += About();
+    // appElement.innerHTML += About();
+    appElement.innerHTML = About();
   }
 };
