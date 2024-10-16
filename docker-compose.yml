@@ -8,8 +8,8 @@ services:
       - "8080:80"
       # 5000 is already used in Mac
     volumes:
-      - ./var/www/html/arch-struct-analysis/api:/var/www/html/arch-struct-analysis/api
-      - ./var/www/html/arch-struct-analysis/frontend:/var/www/html/arch-struct-analysis/frontend
+      - ./api:/var/www/html/arch-struct-analysis/api
+      - ./frontend:/var/www/html/arch-struct-analysis/frontend
 
       - ./etc/httpd/conf/httpd.conf:/etc/httpd/conf/httpd.conf
       - ./etc/httpd/conf.d/php.conf:/etc/httpd/conf.d/php.conf

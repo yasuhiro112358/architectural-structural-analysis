@@ -34,8 +34,8 @@ RUN dnf install -y vim
 RUN pip3 install uwsgi
 
 # アプリケーションのコードをコピー
-COPY ./var/www/html/arch-struct-analysis/api /var/www/html/arch-struct-analysis/api
-COPY ./var/www/html/arch-struct-analysis/frontend /var/www/html/arch-struct-analysis/frontend
+COPY ./api /var/www/html/arch-struct-analysis/api
+COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
 # requirements.txtを使って依存関係をインストール
 RUN pip3 install -r /var/www/html/arch-struct-analysis/api/requirements.txt
