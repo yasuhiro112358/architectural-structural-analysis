@@ -20,9 +20,8 @@ async function initPage() {
       event.preventDefault();
 
       const url = event.target.getAttribute('href'); // クリックされたリンクのURLを取得
-      console.log('Links to', url, 'is clicked');
-
-      history.pushState(null, null, url); // URLを変更して履歴に追加
+      const state = { url: url }; // 履歴に追加するデータ
+      history.pushState(state, '', url); // URLを変更して履歴に追加
       console.log('history:', history);
 
       // すべてのリンクからactiveクラスを削除
@@ -45,3 +44,4 @@ window.addEventListener('popstate', function () {
 
 // 初期化時に一度呼び出す
 initPage();
+console.log('main.js loaded');
