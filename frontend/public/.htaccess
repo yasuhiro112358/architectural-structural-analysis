@@ -4,7 +4,7 @@
     RewriteEngine On 
 
     # Set the base URL for the URL rewriting
-    RewriteBase / 
+    RewriteBase /
 
     # Do not rewrite index.html
     RewriteRule ^index\.html$ - [L]
