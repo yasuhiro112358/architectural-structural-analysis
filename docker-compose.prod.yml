@@ -7,3 +7,5 @@ services:
     ports:
       - "8083:80"
       # 5000 is already used in Mac
+    restart: always
+    tty: true
