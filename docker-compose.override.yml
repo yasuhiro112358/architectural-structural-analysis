@@ -1,0 +1,12 @@
+services:
+  web:
+    volumes:
+      - ./api:/var/www/html/arch-struct-analysis/api
+      - ./frontend:/var/www/html/arch-struct-analysis/frontend
+
+      - ./etc/apache2/apache2.conf:/etc/apache2/apache2.conf
+      - ./etc/apache2/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./etc/apache2/sites-available/arch-struct-analysis.conf:/etc/apache2/sites-available/arch-struct-analysis.conf
+      - ./etc/uwsgi/sites/arch-struct-analysis.ini:/etc/uwsgi/sites/arch-struct-analysis.ini
+
+      - ./var/log/apache2:/var/log/apache2

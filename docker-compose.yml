@@ -1,9 +1,8 @@
 services:
-  flask_app:
-    build: .
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
-      # 5000 is already used in Mac
-    volumes:
-      - ./api:/var/www/html/arch-struct-analysis/api
-      - ./frontend:/var/www/html/arch-struct-analysis/frontend
+      - "8083:80"
+    tty: true
