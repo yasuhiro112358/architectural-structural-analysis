@@ -1,4 +1,3 @@
-// import { Header } from './components/Header.js';
 import { router } from './services/router.js';
 import Home from './components/Home.js';
 import About from './components/About.js';
@@ -6,20 +5,18 @@ import Contact from './components/Contact.js';
 import SimpleSupport from './components/SimpleSupport.js';
 import SeismicWave from './components/SeismicWave.js';
 
-export const App = () => {
+const routes = {
+  '/': Home,
+  '/about': About,
+  '/contact': Contact,
+  '/simple-support': SimpleSupport,
+  '/seismic-wave': SeismicWave,
+};
+
+export default function App() {
   const appElement = document.getElementById('app');
   const currentRoute = router.getCurrentRoute();
+  const Component = routes[currentRoute] || Home; // Default to Home if route not found
 
-  // Render page based on route
-  if (currentRoute === '/') {
-    appElement.innerHTML = Home();
-  } else if (currentRoute === '/about') {
-    appElement.innerHTML = About();
-  } else if (currentRoute === '/contact') {
-    appElement.innerHTML = Contact();
-  } else if (currentRoute === '/simple-support') {
-    appElement.innerHTML = SimpleSupport();
-  } else if (currentRoute === '/seismic-wave') {
-    appElement.innerHTML = SeismicWave();
-  }
-};
+  appElement.innerHTML = Component();
+}

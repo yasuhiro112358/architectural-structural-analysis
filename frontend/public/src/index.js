@@ -1,4 +1,4 @@
-import { App } from './App.js';
+import App  from './App.js';
 import { router } from './services/router.js';
 
 // Initial render
