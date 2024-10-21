@@ -7,4 +7,4 @@ apache2ctl -D FOREGROUND &
 php-fpm8.3 -F &
 
 # uWSGIを起動してFlaskアプリケーションを実行
-/opt/venv/bin/uwsgi --ini /var/www/html/arch-struct-analysis/arch-struct-analysis.ini
+/opt/venv/bin/uwsgi --ini /etc/uwsgi/sites/arch-struct-analysis.ini

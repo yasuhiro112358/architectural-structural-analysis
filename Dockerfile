@@ -23,33 +23,31 @@ RUN apt-get install -y python3-venv
 
 RUN apt-get clean
 
-# mod_rewriteを有効にする
-RUN a2enmod rewrite
-
-# Python仮想環境を作成
-RUN python3 -m venv /opt/venv
-
-# 仮想環境をアクティベートし、uWSGIをインストール
-RUN /opt/venv/bin/pip install uwsgi
-
-# 必要なパッケージをインストール
-# RUN yum install -y mod_proxy_uwsgi
-
-
 # アプリケーションのコードをコピー
 COPY ./api /var/www/html/arch-struct-analysis/api
 COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
+# Python仮想環境を作成
+RUN python3 -m venv /opt/venv
+
 # requirements.txtを使って依存関係をインストール
 RUN /opt/venv/bin/pip install -r /var/www/html/arch-struct-analysis/api/requirements.txt
+
+# Apacheのモジュールを有効化
+RUN a2enmod rewrite
+RUN a2enmod proxy
+RUN a2enmod proxy_uwsgi
 
 # Apacheの設定ファイルをコピー
 COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
 COPY ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./etc/apache2/sites-available/arch-struct-analysis.conf /etc/apache2/sites-available/arch-struct-analysis.conf
 
+# uWSGIをインストール
+RUN /opt/venv/bin/pip install uwsgi
+
 # uWSGIの設定ファイルをコピー
-COPY ./var/www/html/arch-struct-analysis/arch-struct-analysis.ini /var/www/html/arch-struct-analysis/arch-struct-analysis.ini
+COPY ./etc/uwsgi/sites/arch-struct-analysis.ini /etc/uwsgi/sites/arch-struct-analysis.ini
 
 # ファイルの所有者を変更
 RUN chown -R www-data:www-data /var/www/html/arch-struct-analysis
