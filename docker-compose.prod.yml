@@ -1,11 +1,7 @@
 services:
-  # flask_app:
   web:
-    build: .
     image: 767397934648.dkr.ecr.ap-northeast-1.amazonaws.com/arch-struct-analysis:latest
     platform: linux/amd64
     ports:
       - "8083:80"
-      # 5000 is already used in Mac
     restart: always
-    tty: true
