@@ -6,9 +6,21 @@ export const Home = () => {
   const render = () => `
     ${Header()}
     <main>
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
-      <button id="click-me-btn">Click Me</button>
+      <div class="container pt-5">  
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-8 col-md-6">
+            <h1 class="text-center mb-4">Architectural Structural Analysis</h1>
+            
+            <a href="/simple-support" class="btn btn-dark d-block mb-3" data-link>
+              Simple Support
+            </a>
+
+            <a href="/seismic-wave" class="btn btn-dark d-block mb-3" data-link>
+              Seismic Wave
+            </a>
+          </div>
+        </div>
+      </div>
     </main>
     ${Footer()}
   `;

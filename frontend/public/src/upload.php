@@ -26,9 +26,9 @@ if ($_FILES['file']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['file'
 
     // for test
     // curl_setopt($curl, CURLOPT_URL, API_URL . "/upload");
+    
     // for 気象庁's data
-    curl_setopt($curl, CURLOPT_URL, API_URL . "/seismic-wave");
-
+    // curl_setopt($curl, CURLOPT_URL, API_URL . "/seismic-wave");
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
