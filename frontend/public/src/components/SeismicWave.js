@@ -1,4 +1,4 @@
-import renderGraph from "./renderGraph.js";
+import renderGraph from "../services/renderGraph.js";
 
 export const SeismicWave = () => {
   const init = () => {

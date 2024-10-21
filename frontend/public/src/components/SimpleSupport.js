@@ -1,4 +1,4 @@
-import simpleSupport from "./simple-support.js";
+import simpleSupport from "../services/simpleSupport.js";
 
 export const SimpleSupport = () => {
   const init = () => {
