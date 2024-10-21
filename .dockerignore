@@ -1,0 +1,27 @@
+# Python files  
+venv
+
+# Node modules
+node_modules
+
+# environment files
+.env
+.env.prod
+
+# IDE and editor files
+.vscode
+.idea
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Other unnecessary files
+tests
+*.md
+*.log
+*.swp
