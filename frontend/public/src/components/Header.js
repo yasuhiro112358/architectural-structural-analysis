@@ -1,4 +1,4 @@
-export const Header = () => {
+export default function Header() {
   return `
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
@@ -28,4 +28,4 @@ export const Header = () => {
       </div>
     </nav>
   `;
-};
+}
