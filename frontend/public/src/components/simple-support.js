@@ -1,8 +1,7 @@
-'use strict';
-{
+export default function simpleSupport() {
   const calculateBtn = document.getElementById('calculate-btn');
   console.log(calculateBtn);
-  
+
   calculateBtn.addEventListener('click', (e) => {
     console.log('clicked');
     e.preventDefault();

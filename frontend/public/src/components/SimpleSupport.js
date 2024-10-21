@@ -1,4 +1,11 @@
+import simpleSupport from "./simple-support.js";
+
 export const SimpleSupport = () => {
+  const init = () => {
+    simpleSupport();
+  };
+  setTimeout(init, 0);
+
   return `
     <main>
       <div class="container pt-5">
