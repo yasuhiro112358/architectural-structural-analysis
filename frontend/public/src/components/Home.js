@@ -1,11 +1,11 @@
-import { Header } from './Header.js';
-import { Footer } from './Footer.js';
+import Layout from './Layout.js';
 
-export const Home = () => {
-  // Render the HTML structure with nested components
-  const render = () => `
-    ${Header()}
-    <main>
+export default function Home() {
+  const init = () => {};
+  setTimeout(init, 0);
+
+  return `
+    ${Layout(`
       <div class="container pt-5">  
         <div class="row justify-content-center">
           <div class="col-12 col-sm-8 col-md-6">
@@ -21,21 +21,6 @@ export const Home = () => {
           </div>
         </div>
       </div>
-    </main>
-    ${Footer()}
+    `)}
   `;
-
-  // Define any logic to run after the component has been rendered
-  const init = () => {
-    const button = document.getElementById('click-me-btn');
-    if (button) {
-      button.addEventListener('click', () => {
-        alert('Button clicked!');
-      });
-    }
-  };
-
-  // Return the render method (like returning JSX in React)
-  setTimeout(init, 0); // Mimic componentDidMount or useEffect
-  return render();
-};
+}

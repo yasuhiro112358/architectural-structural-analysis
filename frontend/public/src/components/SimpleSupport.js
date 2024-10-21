@@ -1,13 +1,14 @@
+import Layout from "./Layout.js";
 import simpleSupport from "../services/simpleSupport.js";
 
-export const SimpleSupport = () => {
+export default function SimpleSupport() {
   const init = () => {
     simpleSupport();
   };
   setTimeout(init, 0);
 
   return `
-    <main>
+    ${Layout(`
       <div class="container pt-5">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-8 col-md-6">
@@ -53,6 +54,6 @@ export const SimpleSupport = () => {
           </div>
         </div>
       </div>
-    </main>
+    `)}
   `;
-};
+}

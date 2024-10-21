@@ -1,13 +1,14 @@
+import Layout from "./Layout.js";
 import renderGraph from "../services/renderGraph.js";
 
-export const SeismicWave = () => {
+export default function SeismicWave() {
   const init = () => {
     renderGraph();
   };
   setTimeout(init, 0);
 
   return `
-    <main>
+    ${Layout(`
       <div class="container mt-5 mb-4">
           <h1 class="text-center mb-3">Seismic Wave</h1>
       </div>
@@ -71,6 +72,6 @@ export const SeismicWave = () => {
               </div>
           </div>
       </form>
-    </main>
+    `)}
   `;
-};
+}
