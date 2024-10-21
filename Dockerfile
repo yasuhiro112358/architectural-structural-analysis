@@ -1,60 +1,63 @@
-# Amazon Linux 2023ベースのイメージを使用
-FROM amazonlinux:2023
+FROM ubuntu:24.04
+
+RUN apt-get update -y
+
+RUN apt-get install -y python3
+RUN apt-get install -y python3-pip 
+RUN apt-get install -y python3-setuptools 
+RUN apt-get install -y python3-dev
+RUN apt-get install -y libffi-dev 
+RUN apt-get install -y openssl 
+RUN apt-get install -y libssl-dev 
+RUN apt-get install -y apache2 
+RUN apt-get install -y apache2-dev 
+RUN apt-get install -y gcc 
+RUN apt-get install -y procps
+RUN apt-get install -y libapache2-mod-php 
+RUN apt-get install -y php 
+RUN apt-get install -y php-cli 
+RUN apt-get install -y php-mysql 
+RUN apt-get install -y php-fpm 
+RUN apt-get install -y vim
+RUN apt-get install -y python3-venv
+
+RUN apt-get clean
+
+# mod_rewriteを有効にする
+RUN a2enmod rewrite
+
+# Python仮想環境を作成
+RUN python3 -m venv /opt/venv
+
+# 仮想環境をアクティベートし、uWSGIをインストール
+RUN /opt/venv/bin/pip install uwsgi
 
 # 必要なパッケージをインストール
-RUN yum update -y
-RUN yum install -y python3
-RUN yum install -y python3-pip
-RUN yum install -y python3-setuptools
-RUN yum install -y python3-devel
-RUN yum install -y libffi-devel
-RUN yum install -y openssl-devel
-RUN yum install -y httpd
-RUN yum install -y httpd-devel
-RUN yum install -y gcc
-RUN yum install -y procps 
-RUN yum install -y mod_proxy_uwsgi
-RUN yum clean all
+# RUN yum install -y mod_proxy_uwsgi
 
-RUN dnf update -y
-RUN dnf install -y php
-RUN dnf install -y php-cli
-RUN dnf install -y php-mysqlnd
-RUN dnf install -y php-fpm
-
-# RUN systemctl start php-fpm
-RUN systemctl enable php-fpm
-RUN mkdir -p /run/php-fpm
-RUN chown apache:apache /run/php-fpm
-# RUN php-fpm -D
-
-RUN dnf install -y vim
-
-# uWSGIをインストール
-RUN pip3 install uwsgi
 
 # アプリケーションのコードをコピー
 COPY ./api /var/www/html/arch-struct-analysis/api
 COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
 # requirements.txtを使って依存関係をインストール
-RUN pip3 install -r /var/www/html/arch-struct-analysis/api/requirements.txt
+RUN /opt/venv/bin/pip install -r /var/www/html/arch-struct-analysis/api/requirements.txt
 
 # Apacheの設定ファイルをコピー
-COPY ./etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf
-COPY ./etc/httpd/conf.d/php.conf /etc/httpd/conf.d/php.conf
-COPY ./etc/httpd/conf.d/arch-struct-analysis.conf /etc/httpd/conf.d/arch-struct-analysis.conf
+COPY ./etc/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY ./etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./etc/apache2/sites-available/arch-struct-analysis.conf /etc/apache2/sites-available/arch-struct-analysis.conf
 
 # uWSGIの設定ファイルをコピー
 COPY ./var/www/html/arch-struct-analysis/arch-struct-analysis.ini /var/www/html/arch-struct-analysis/arch-struct-analysis.ini
 
 # ファイルの所有者を変更
-RUN chown -R apache:apache /var/www/html/arch-struct-analysis
+RUN chown -R www-data:www-data /var/www/html/arch-struct-analysis
 RUN chmod -R 755 /var/www/html/arch-struct-analysis
 
 # ログディレクトリの設定
-RUN chown -R root:apache /var/log/httpd
-RUN chmod 750 /var/log/httpd
+RUN chown -R root:www-data /var/log/apache2
+RUN chmod 750 /var/log/apache2
 
 # Flaskアプリケーション用のエントリーポイントスクリプトを作成
 COPY ./start-server.sh /start-server.sh

@@ -4,11 +4,11 @@ services:
       - ./api:/var/www/html/arch-struct-analysis/api
       - ./frontend:/var/www/html/arch-struct-analysis/frontend
 
-      - ./etc/httpd/conf/httpd.conf:/etc/httpd/conf/httpd.conf
-      - ./etc/httpd/conf.d/php.conf:/etc/httpd/conf.d/php.conf
-      - ./etc/httpd/conf.d/arch-struct-analysis.conf:/etc/httpd/conf.d/arch-struct-analysis.conf
+      - ./etc/apache2/apache2.conf:/etc/apache2/apache2.conf
+      - ./etc/apache2/sites-available/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./etc/apache2/sites-available/arch-struct-analysis.conf:/etc/apache2/sites-available/arch-struct-analysis.conf
       - ./var/www/html/arch-struct-analysis/arch-struct-analysis.ini:/var/www/html/arch-struct-analysis/arch-struct-analysis.ini
 
-      - ./var/log/httpd:/var/log/httpd
-      - ./var/log/php-fpm:/var/log/php-fpm
+      # - ./var/log/apache2:/var/log/apache2
+      # - ./var/log/php-fpm:/var/log/php-fpm
 
