@@ -1,4 +1,5 @@
 import Layout from './Layout.js';
+import Button from './Button.js';
 
 export default function Home() {
   const init = () => {};
@@ -6,20 +7,16 @@ export default function Home() {
 
   return `
     ${Layout(`
-      <div class="container pt-5">  
-        <div class="row justify-content-center">
-          <div class="col-12 col-sm-8 col-md-6">
-            <h1 class="text-center mb-4">Architectural Structural Analysis</h1>
-            
-            <a href="/simple-support" class="btn btn-dark d-block mb-3" data-link>
-              Simple Support
-            </a>
-
-            <a href="/seismic-wave" class="btn btn-dark d-block mb-3" data-link>
-              Seismic Wave
-            </a>
+      <div class="pt-5">  
+        <h1 class="text-center mb-4">Architectural Structural Analysis</h1>
+        <div class="d-flex flex-column align-items-center">
+          <div class="mb-3">
+            ${Button({ href: '/simple-support', text: 'Simple Support' })}
           </div>
-        </div>
+          <div class="mb-3">
+            ${Button({ href: '/seismic-wave', text: 'Seismic Wave' })}
+          </div>
+        </div>  
       </div>
     `)}
   `;
