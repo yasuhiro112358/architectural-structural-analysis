@@ -1,5 +1,6 @@
 import Header from './Header.js';
 import Footer from './Footer.js';
+import Container from './Container.js';
 
 export default function Layout(children) {
   return `
@@ -8,7 +9,7 @@ export default function Layout(children) {
         ${Header()}
       </header>
       <main class="flex-grow-1" style="padding-top: 56px;">
-        ${children}
+        ${Container(children)}
       </main>
       <footer style="height: 36px;">
         ${Footer()}
