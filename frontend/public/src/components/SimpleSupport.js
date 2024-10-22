@@ -9,13 +9,13 @@ export default function SimpleSupport() {
 
   return `
     ${Layout(`
-      <div class="container pt-5">
-        <div class="row justify-content-center">
-          <div class="col-12 col-sm-8 col-md-6">
+      <div class="pt-5">
 
             <h1 class="text-center mb-3">Simple Support</h1>
 
-            <img src="./assets/images/beam.png" class="img-fluid w-100 p-3 mb-3" alt="">
+            <div class="d-flex justify-content-center mb-3">
+              <img src="./assets/images/beam.png" alt="" class="d-block text-center w-100" style="max-width: 300px">
+            </div>
 
             <div id="result-container" class="mb-4">
               <div class="border border-2 p-3" style="height: 100px">
@@ -51,8 +51,7 @@ export default function SimpleSupport() {
             <div class="mb-5">
               <a href="/" class="btn btn-outline-dark w-100" data-link>Back to Home</a>
             </div>
-          </div>
-        </div>
+        
       </div>
     `)}
   `;
