@@ -15,13 +15,10 @@ export default function About() {
 
   return `
     ${Layout(`
-      <h1>About Page</h1>
-      <p>This is the about page.</p>
-      <form id="contact-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" />
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        <h1>About Page</h1>
+        <p>This is the about page.</p>
+      </div>
     `)}
   `;
 }
