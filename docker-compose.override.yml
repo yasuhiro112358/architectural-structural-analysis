@@ -1,7 +1,7 @@
 services:
   web:
     volumes:
-      - ./api:/var/www/html/arch-struct-analysis/api
+      - ./backend:/var/www/html/arch-struct-analysis/backend
       - ./frontend:/var/www/html/arch-struct-analysis/frontend
 
       - ./etc/apache2/apache2.conf:/etc/apache2/apache2.conf

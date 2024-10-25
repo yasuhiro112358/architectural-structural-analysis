@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/var/www/html/arch-struct-analysis/api')
+sys.path.append('/var/www/html/arch-struct-analysis/backend')
 import os
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS # CORS（Cross-Origin Resource Sharing）
@@ -8,7 +8,8 @@ from calc_module import calculate_structure
 app = Flask(__name__)
 CORS(app)
 
-relative_upload_folder = 'uploads'
+# relative_upload_folder = 'uploads'
+relative_upload_folder = '../frontend/public/assets/data/uploads'
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), relative_upload_folder)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -55,6 +56,16 @@ def upload_file():
         return jsonify({'message': 'File uploaded successfully'}), 200
     else:
         return jsonify({'error': 'Invalid file type. Only CSV files are allowed.'}), 400
+
+@app.route('/api/files', methods=['GET'])
+def list_files():
+    directory = UPLOAD_FOLDER  # 対象のディレクトリ
+    try:
+        files = os.listdir(directory)  # ディレクトリ内のファイル名を取得
+        return jsonify(files)  # JSON形式でファイル名を返す
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == '__main__':

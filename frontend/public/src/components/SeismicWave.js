@@ -4,17 +4,24 @@ import renderGraph from "../services/renderGraph.js";
 export default function SeismicWave() {
   const uploadedFiles = [];
 
+  const renderUploadedFiles = () => {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = uploadedFiles.map(file => `<li>${file}</li>`).join('');
+  };
+
   const fetchUploadedFiles = () => {
-    fetch('/api/uploads')
+    fetch('/api/files')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch uploaded files');
         }
+        console.log(response);
         return response.json();
       })
       .then(data => {
         uploadedFiles.length = 0; // Clear the array
-        uploadedFiles.push(...data.files);
+        console.log(data);
+        uploadedFiles.push(...data); // ファイル名を取得
         renderUploadedFiles();
       })
       .catch(error => {
@@ -23,10 +30,6 @@ export default function SeismicWave() {
       });
   };
 
-  const renderUploadedFiles = () => {
-    const fileList = document.getElementById('fileList');
-    fileList.innerHTML = uploadedFiles.map(file => `<li>${file}</li>`).join('');
-  };
 
   const uploadFile = () => {
     const fileInput = document.getElementById('fileInput');
