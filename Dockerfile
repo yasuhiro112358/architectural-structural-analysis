@@ -24,7 +24,7 @@ RUN apt-get install -y python3-venv
 RUN apt-get clean
 
 # アプリケーションのコードをコピー
-COPY ./api /var/www/html/arch-struct-analysis/api
+COPY ./backend /var/www/html/arch-struct-analysis/backend
 COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
 # アップロードディレクトリを作成
@@ -35,7 +35,7 @@ COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 RUN python3 -m venv /opt/venv
 
 # requirements.txtを使って依存関係をインストール
-RUN /opt/venv/bin/pip install -r /var/www/html/arch-struct-analysis/api/requirements.txt
+RUN /opt/venv/bin/pip install -r /var/www/html/arch-struct-analysis/backend/requirements.txt
 
 # Apacheのモジュールを有効化
 RUN a2enmod rewrite
