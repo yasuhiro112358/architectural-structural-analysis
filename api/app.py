@@ -7,7 +7,9 @@ from calc_module import calculate_structure
 
 app = Flask(__name__)
 CORS(app)
-UPLOAD_FOLDER = '/var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads'
+
+relative_upload_folder = 'uploads'
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), relative_upload_folder)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # アップロードディレクトリが存在しない場合は作成
@@ -60,4 +62,3 @@ if __name__ == '__main__':
     # debug=True: デバッグモードを有効にする
     # host='0.0.0.0': 他のデバイスからアクセス可能にする
     # port=5001: ポート番号を5001に設定する
-    
