@@ -10,3 +10,5 @@ services:
       - ./etc/uwsgi/sites/arch-struct-analysis.ini:/etc/uwsgi/sites/arch-struct-analysis.ini
 
       - ./var/log/apache2:/var/log/apache2
+
+      - ./var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads:/var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads

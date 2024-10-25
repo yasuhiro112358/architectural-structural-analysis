@@ -1,13 +1,17 @@
 import sys
 sys.path.append('/var/www/html/arch-struct-analysis/api')
-
+import os
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS # CORS（Cross-Origin Resource Sharing）
-
 from calc_module import calculate_structure
 
 app = Flask(__name__)
 CORS(app)
+UPLOAD_FOLDER = '/var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# アップロードディレクトリが存在しない場合は作成
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/api/home', methods=['GET'])
 def home():
@@ -29,6 +33,27 @@ def calculate():
 
     # 計算結果をJSON形式でクライアントに返す
     return jsonify({"bending_stress": result})
+
+@app.route('/api/upload', methods=['POST'])
+def upload_file():
+    # return jsonify({'message': 'test message'}), 200
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    file = request.files['file']
+    
+    # ファイル名が空でないかチェック
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    # CSVファイルのみを許可
+    if file and file.filename.endswith('.csv'):
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
+        return jsonify({'message': 'File uploaded successfully'}), 200
+    else:
+        return jsonify({'error': 'Invalid file type. Only CSV files are allowed.'}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

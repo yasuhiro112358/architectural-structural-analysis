@@ -27,6 +27,10 @@ RUN apt-get clean
 COPY ./api /var/www/html/arch-struct-analysis/api
 COPY ./frontend /var/www/html/arch-struct-analysis/frontend
 
+# アップロードディレクトリを作成
+RUN mkdir -p /var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads 
+RUN chown -R www-data:www-data /var/www/html/arch-struct-analysis/frontend/public/assets/data/uploads
+
 # Python仮想環境を作成
 RUN python3 -m venv /opt/venv
 
